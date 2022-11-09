@@ -4,16 +4,19 @@ using System.IO; //нужно для записи в файл
 //добавить в начало программы using MySql.Data.MySqlClient;
 using MySql.Data.MySqlClient;
 Console.WriteLine("Добро пожаловать в программу шифрования по методу ШИФР ЦЕЗАРЯ");
-string userInput = "";
+var userInput = "";
 do //проверка на ввод пустой строки
 {
     Console.WriteLine("Введите слово на русском языке для шифрования и нажмите ENTER");
     userInput = Console.ReadLine();
 } while (String.IsNullOrEmpty(userInput));
-int sdvig;
-bool done=false;
-do{
+int sdvig;//для хранения величины сдвига
+bool done=false;//для хранения успешности преобразования в целое число
+do{//проверка на ввод целого числа в качестве сдвига
 Console.WriteLine("Укажите сдвиг шифра в виде целого числа и нажмите ENTER");
+//метод "int.PryParse" возвращает true если если удалось преобразовать в целое число и
+// false если не удалось преобразовать. Если удалось преобразовать строку в целое число,
+//то результат преобразования попадает в перемнуую sdvig
 done = int.TryParse(Console.ReadLine(),out sdvig);
 }while(!done);
 string alfavit = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; //исходный алфавит
@@ -36,7 +39,6 @@ string shifr = "";
 for (int i = 0; i < userInput.Length; i++)
 {
     int letterNumber = alfavit.IndexOf(userInput[i]);
-    //Console.Write(newAlfavit[letterNumber]);
     shifr += newAlfavit[letterNumber];
 }
 Console.WriteLine("Зашифрованное слово: {0}",shifr);
@@ -64,3 +66,8 @@ cmd.Prepare();
 cmd.ExecuteNonQuery();
 Console.WriteLine("");
 Console.WriteLine("Запись в БД выполнена.");
+//todo
+//написать "интерфейс" для того, чтобы пользователь мог выбрать что делать
+//написать метод для шифрования и расшифрования из БД и из терминала
+//написать метод для получения всех записей из БД
+//
