@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "pk31pk32Shifr/1.0.0": {
+        "runtime": {
+          "pk31pk32Shifr.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "pk31pk32Shifr/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
