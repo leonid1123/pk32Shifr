@@ -10,8 +10,12 @@ do //проверка на ввод пустой строки
     Console.WriteLine("Введите слово на русском языке для шифрования и нажмите ENTER");
     userInput = Console.ReadLine();
 } while (String.IsNullOrEmpty(userInput));
+int sdvig;
+bool done=false;
+do{
 Console.WriteLine("Укажите сдвиг шифра в виде целого числа и нажмите ENTER");
-int sdvig = int.Parse(Console.ReadLine());
+done = int.TryParse(Console.ReadLine(),out sdvig);
+}while(!done);
 string alfavit = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; //исходный алфавит
 //формирование алфавита с указанным сдвигом
 string newAlfavit = "";
@@ -32,9 +36,10 @@ string shifr = "";
 for (int i = 0; i < userInput.Length; i++)
 {
     int letterNumber = alfavit.IndexOf(userInput[i]);
-    Console.Write(newAlfavit[letterNumber]);
+    //Console.Write(newAlfavit[letterNumber]);
     shifr += newAlfavit[letterNumber];
 }
+Console.WriteLine("Зашифрованное слово: {0}",shifr);
 //Записать полученное слово и сдвиг в файл
 //Write - перезаписывает файл, Append - дописывает
 File.WriteAllText("res.txt", sdvig.ToString());
