@@ -4,8 +4,12 @@ using System.IO; //нужно для записи в файл
 //добавить в начало программы using MySql.Data.MySqlClient;
 using MySql.Data.MySqlClient;
 Console.WriteLine("Добро пожаловать в программу шифрования по методу ШИФР ЦЕЗАРЯ");
-Console.WriteLine("Введите слово на русском языке для шифрования и нажмите ENTER");
-string userInput = Console.ReadLine();
+string userInput = "";
+do //проверка на ввод пустой строки
+{
+    Console.WriteLine("Введите слово на русском языке для шифрования и нажмите ENTER");
+    userInput = Console.ReadLine();
+} while (String.IsNullOrEmpty(userInput));
 Console.WriteLine("Укажите сдвиг шифра в виде целого числа и нажмите ENTER");
 int sdvig = int.Parse(Console.ReadLine());
 string alfavit = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; //исходный алфавит
@@ -55,6 +59,3 @@ cmd.Prepare();
 cmd.ExecuteNonQuery();
 Console.WriteLine("");
 Console.WriteLine("Запись в БД выполнена.");
-
-
-
