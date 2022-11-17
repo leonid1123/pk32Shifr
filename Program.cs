@@ -11,14 +11,15 @@ do //проверка на ввод пустой строки
     userInput = Console.ReadLine();
 } while (String.IsNullOrEmpty(userInput));
 int sdvig;//для хранения величины сдвига
-bool done=false;//для хранения успешности преобразования в целое число
-do{//проверка на ввод целого числа в качестве сдвига
-Console.WriteLine("Укажите сдвиг шифра в виде целого числа и нажмите ENTER");
-//метод "int.PryParse" возвращает true если если удалось преобразовать в целое число и
-// false если не удалось преобразовать. Если удалось преобразовать строку в целое число,
-//то результат преобразования попадает в перемнуую sdvig
-done = int.TryParse(Console.ReadLine(),out sdvig);
-}while(!done);
+bool done = false;//для хранения успешности преобразования в целое число
+do
+{//проверка на ввод целого числа в качестве сдвига
+    Console.WriteLine("Укажите сдвиг шифра в виде целого числа и нажмите ENTER");
+    //метод "int.PryParse" возвращает true если если удалось преобразовать в целое число и
+    // false если не удалось преобразовать. Если удалось преобразовать строку в целое число,
+    //то результат преобразования попадает в перемнуую sdvig
+    done = int.TryParse(Console.ReadLine(), out sdvig);
+} while (!done);
 string alfavit = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; //исходный алфавит
 //формирование алфавита с указанным сдвигом
 string newAlfavit = "";
@@ -41,7 +42,10 @@ for (int i = 0; i < userInput.Length; i++)
     int letterNumber = alfavit.IndexOf(userInput[i]);
     shifr += newAlfavit[letterNumber];
 }
-Console.WriteLine("Зашифрованное слово: {0}",shifr);
+Console.WriteLine("Зашифрованное слово: {0}", shifr);
+
+Console.WriteLine("Расшифрованное слово:{0}",Decode(shifr,sdvig));
+
 //Записать полученное слово и сдвиг в файл
 //Write - перезаписывает файл, Append - дописывает
 File.WriteAllText("res.txt", sdvig.ToString());
@@ -83,3 +87,25 @@ Console.WriteLine("Запись в БД выполнена.");
 //по логике собственный,но???
 //запись в БД - внутри методов или собственный метод?
 //по логике собственный, но???
+string Decode(string _shifr, int _sdvig)
+{
+    string alfavit = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"; //исходный алфавит
+    //формирование алфавита с указанным сдвигом
+    string newAlfavit = "";
+    for (int i = 0; i < alfavit.Length; i++)
+    {
+        int j = i + _sdvig;
+        if (j > 32)
+        {//проверка, если дошли до конца исходного алфавита
+            j = j - 33;
+        }
+        newAlfavit += alfavit[j];
+    }
+    string word = "";
+    for (int i = 0; i < _shifr.Length; i++)
+    {
+        int letterNumber = newAlfavit.IndexOf(_shifr[i]);
+        word += alfavit[letterNumber];
+    }
+    return word;
+}
